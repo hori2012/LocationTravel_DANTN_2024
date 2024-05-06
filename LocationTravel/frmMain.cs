@@ -224,10 +224,9 @@ namespace LocationTravel
                             foreach (var item in combinations)
                             {
                                 Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                                //foreach (var element in item)
-                                //{
-                                //}
                             }
+                            frmRecom form = new frmRecom(combinations);
+                            form.ShowDialog();
                         }
                         else
                         {
@@ -243,10 +242,9 @@ namespace LocationTravel
                             foreach (var item in combinations)
                             {
                                 Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                                //foreach (var element in item)
-                                //{
-                                //}
                             }
+                            frmRecom form = new frmRecom(combinations);
+                            form.ShowDialog();
                         }
                         else
                         {
@@ -266,10 +264,9 @@ namespace LocationTravel
                             foreach (var item in combinations)
                             {
                                 Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                                //foreach (var element in item)
-                                //{
-                                //}
                             }
+                            frmRecom form = new frmRecom(combinations);
+                            form.ShowDialog();
                         }
                         else
                         {
@@ -285,10 +282,9 @@ namespace LocationTravel
                             foreach (var item in combinations)
                             {
                                 Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                                //foreach (var element in item)
-                                //{
-                                //}
                             }
+                            frmRecom form = new frmRecom(combinations);
+                            form.ShowDialog();
                         }
                         else
                         {

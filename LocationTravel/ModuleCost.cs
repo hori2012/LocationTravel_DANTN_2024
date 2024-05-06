@@ -94,7 +94,7 @@ namespace LocationTravel
             }
         }
     }
-    class Item
+    public class Item
     {
         public int Id { get; set; }
         public decimal Cost { get; set; }

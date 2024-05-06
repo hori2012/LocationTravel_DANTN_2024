@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombinationLoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CombinationLoc.Designer.cs">
+      <DependentUpon>CombinationLoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRecom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecom.Designer.cs">
+      <DependentUpon>frmRecom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Area.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\ModelRecommendation.cs" />
@@ -82,11 +94,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeTravel.cs" />
+    <EmbeddedResource Include="CombinationLoc.resx">
+      <DependentUpon>CombinationLoc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAdd.resx">
       <DependentUpon>frmAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecom.resx">
+      <DependentUpon>frmRecom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
