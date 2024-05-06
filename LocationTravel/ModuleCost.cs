@@ -15,10 +15,10 @@ namespace LocationTravel
             entertains = entertains.OrderBy(h => h.Cost).ToList();
             coffees = coffees.OrderBy(h => h.Cost).ToList();
             List<List<Item>> combinations = new List<List<Item>>();
-            List<List<Item>> hotelsCombination = GetCombinations(hotels, 1).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+            List<List<Item>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
             List<List<Item>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
             List<List<Item>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-            List<List<Item>> coffeesCombination = GetCombinations(coffees, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+            List<List<Item>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
             if (numHotel > 0)
             {
                 foreach (var hotel in hotelsCombination)

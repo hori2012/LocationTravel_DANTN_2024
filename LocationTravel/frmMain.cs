@@ -213,91 +213,65 @@ namespace LocationTravel
                         coffees.Add(new Item() { Id = item.LocationId, Cost = (decimal)item.Cost });
                     }
                 }
+                int numHotel = 0, numFoods = 0, numEntertain = 0, numCoffee = 0;
+                List<List<Item>> combinations = new List<List<Item>>();
                 if ((int)comTimeTravel.SelectedValue == 1)
                 {
-                    if (foods.Count < 3 || entertains.Count < 3 || coffees.Count < 2)
+                    numHotel = 1;
+                    numFoods = 4;
+                    numEntertain = 3;
+                    numCoffee = 2;
+                    numHotel = hotels.Count > 1 ? numHotel : hotels.Count;
+                    numFoods = foods.Count > 4 ? numFoods : foods.Count;
+                    numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
+                    numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
+                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                    if (combinations.Count != 0)
                     {
-                        var combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, 1, foods.Count, entertains.Count, coffees.Count, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                        if (combinations.Count != 0)
+                        Debug.WriteLine("Tổ hợp địa điểm: \n");
+                        foreach (var item in combinations)
                         {
-                            Debug.WriteLine("Tổ hợp địa điểm: \n");
-                            foreach (var item in combinations)
-                            {
-                                Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                            }
-                            frmRecom form = new frmRecom(combinations);
-                            form.ShowDialog();
+                            Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
                         }
-                        else
-                        {
-                            MessageBox.Show("Không đủ dữ liệu để khởi tạo!");
-                        }
+                        frmRecom form = new frmRecom(combinations);
+                        form.ShowDialog();
                     }
                     else
                     {
-                        var combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, 1, 3, 3, 2, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                        if (combinations.Count != 0)
-                        {
-                            Debug.WriteLine("Tổ hợp địa điểm: \n");
-                            foreach (var item in combinations)
-                            {
-                                Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                            }
-                            frmRecom form = new frmRecom(combinations);
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Không đủ dữ liệu để khởi tạo!");
-                        }
+                        MessageBox.Show("Không thể khởi tạo!");
                     }
-
                 }
                 else
                 {
-                    if (foods.Count < 5 || entertains.Count < 4 || coffees.Count < 3)
+                    numHotel = 1;
+                    numFoods = 5;
+                    numEntertain = 4;
+                    numCoffee = 3;
+                    numHotel = hotels.Count > 1 ? numHotel : hotels.Count;
+                    numFoods = foods.Count > 4 ? numFoods : foods.Count;
+                    numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
+                    numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
+                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                    if (combinations.Count != 0)
                     {
-                        var combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, 1, foods.Count, entertains.Count, coffees.Count, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                        if (combinations.Count != 0)
+                        Debug.WriteLine("Tổ hợp địa điểm: \n");
+                        foreach (var item in combinations)
                         {
-                            Debug.WriteLine("Tổ hợp địa điểm: \n");
-                            foreach (var item in combinations)
-                            {
-                                Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                            }
-                            frmRecom form = new frmRecom(combinations);
-                            form.ShowDialog();
+                            Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
                         }
-                        else
-                        {
-                            MessageBox.Show("Không thể khởi tạo!!");
-                        }
+                        frmRecom form = new frmRecom(combinations);
+                        form.ShowDialog();
                     }
                     else
                     {
-                        var combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, 1, 5, 4, 3, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                        if (combinations.Count != 0)
-                        {
-                            Debug.WriteLine("Tổ hợp địa điểm: \n");
-                            foreach (var item in combinations)
-                            {
-                                Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
-                            }
-                            frmRecom form = new frmRecom(combinations);
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Không thể khởi tạo!!");
-                        }
+                        MessageBox.Show("Không thể khởi tạo!!");
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Không thể khởi tạo!");
+                MessageBox.Show("Không thể khởi tạo!!");
             }
         }
     }
-
 }

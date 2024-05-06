@@ -12,9 +12,8 @@ namespace LocationTravel
 {
     public partial class CombinationLoc : UserControl
     {
-        public string name;
-        public DataGridView dataGrid;
-        public int width;
+        private string name;
+        private int width;
 
         public string NameCombination
         {
@@ -23,7 +22,7 @@ namespace LocationTravel
         }
         public DataGridView DataGrid
         {
-            get { return dataGrid; }
+            get { return dtaGrid; }
         }
         public CombinationLoc()
         {

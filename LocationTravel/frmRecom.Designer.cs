@@ -30,22 +30,11 @@
         {
             this.flowLoc = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2VScrollBar1 = new Guna.UI2.WinForms.Guna2VScrollBar();
-            this.combinationLoc1 = new LocationTravel.CombinationLoc();
-            this.combinationLoc2 = new LocationTravel.CombinationLoc();
-            this.combinationLoc3 = new LocationTravel.CombinationLoc();
-            this.combinationLoc4 = new LocationTravel.CombinationLoc();
-            this.combinationLoc5 = new LocationTravel.CombinationLoc();
-            this.flowLoc.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLoc
             // 
             this.flowLoc.AutoScroll = true;
-            this.flowLoc.Controls.Add(this.combinationLoc1);
-            this.flowLoc.Controls.Add(this.combinationLoc2);
-            this.flowLoc.Controls.Add(this.combinationLoc3);
-            this.flowLoc.Controls.Add(this.combinationLoc4);
-            this.flowLoc.Controls.Add(this.combinationLoc5);
             this.flowLoc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLoc.Location = new System.Drawing.Point(0, 0);
             this.flowLoc.Name = "flowLoc";
@@ -66,51 +55,6 @@
             this.guna2VScrollBar1.SmallChange = 5;
             this.guna2VScrollBar1.TabIndex = 1;
             // 
-            // combinationLoc1
-            // 
-            this.combinationLoc1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.combinationLoc1.Location = new System.Drawing.Point(3, 3);
-            this.combinationLoc1.Name = "combinationLoc1";
-            this.combinationLoc1.NameCombination = null;
-            this.combinationLoc1.Size = new System.Drawing.Size(1894, 243);
-            this.combinationLoc1.TabIndex = 0;
-            // 
-            // combinationLoc2
-            // 
-            this.combinationLoc2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.combinationLoc2.Location = new System.Drawing.Point(3, 252);
-            this.combinationLoc2.Name = "combinationLoc2";
-            this.combinationLoc2.NameCombination = null;
-            this.combinationLoc2.Size = new System.Drawing.Size(1894, 243);
-            this.combinationLoc2.TabIndex = 1;
-            // 
-            // combinationLoc3
-            // 
-            this.combinationLoc3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.combinationLoc3.Location = new System.Drawing.Point(3, 501);
-            this.combinationLoc3.Name = "combinationLoc3";
-            this.combinationLoc3.NameCombination = null;
-            this.combinationLoc3.Size = new System.Drawing.Size(1894, 243);
-            this.combinationLoc3.TabIndex = 2;
-            // 
-            // combinationLoc4
-            // 
-            this.combinationLoc4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.combinationLoc4.Location = new System.Drawing.Point(3, 750);
-            this.combinationLoc4.Name = "combinationLoc4";
-            this.combinationLoc4.NameCombination = null;
-            this.combinationLoc4.Size = new System.Drawing.Size(1894, 243);
-            this.combinationLoc4.TabIndex = 3;
-            // 
-            // combinationLoc5
-            // 
-            this.combinationLoc5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.combinationLoc5.Location = new System.Drawing.Point(3, 999);
-            this.combinationLoc5.Name = "combinationLoc5";
-            this.combinationLoc5.NameCombination = null;
-            this.combinationLoc5.Size = new System.Drawing.Size(1894, 243);
-            this.combinationLoc5.TabIndex = 4;
-            // 
             // frmRecom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -124,7 +68,6 @@
             this.Text = "Recomendation";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRecom_Load);
-            this.flowLoc.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -132,11 +75,6 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLoc;
-        private CombinationLoc combinationLoc1;
         private Guna.UI2.WinForms.Guna2VScrollBar guna2VScrollBar1;
-        private CombinationLoc combinationLoc2;
-        private CombinationLoc combinationLoc3;
-        private CombinationLoc combinationLoc4;
-        private CombinationLoc combinationLoc5;
     }
 }

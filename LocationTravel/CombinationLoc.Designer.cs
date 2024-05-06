@@ -55,7 +55,7 @@
             this.groupLoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.groupLoc.Location = new System.Drawing.Point(0, 0);
             this.groupLoc.Name = "groupLoc";
-            this.groupLoc.Size = new System.Drawing.Size(1894, 243);
+            this.groupLoc.Size = new System.Drawing.Size(1894, 389);
             this.groupLoc.TabIndex = 0;
             this.groupLoc.Text = "Gợi ý 1";
             // 
@@ -100,8 +100,8 @@
             this.dtaGrid.ReadOnly = true;
             this.dtaGrid.RowHeadersVisible = false;
             this.dtaGrid.RowHeadersWidth = 51;
-            this.dtaGrid.RowTemplate.Height = 120;
-            this.dtaGrid.Size = new System.Drawing.Size(1894, 203);
+            this.dtaGrid.RowTemplate.Height = 50;
+            this.dtaGrid.Size = new System.Drawing.Size(1894, 349);
             this.dtaGrid.TabIndex = 1;
             this.dtaGrid.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dtaGrid.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -121,7 +121,7 @@
             this.dtaGrid.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dtaGrid.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.dtaGrid.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.dtaGrid.ThemeStyle.RowsStyle.Height = 120;
+            this.dtaGrid.ThemeStyle.RowsStyle.Height = 50;
             this.dtaGrid.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dtaGrid.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
@@ -163,6 +163,7 @@
             this.colImage.ReadOnly = true;
             this.colImage.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colImage.Visible = false;
             // 
             // colName
             // 
@@ -200,7 +201,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupLoc);
             this.Name = "CombinationLoc";
-            this.Size = new System.Drawing.Size(1894, 243);
+            this.Size = new System.Drawing.Size(1894, 389);
             this.groupLoc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtaGrid)).EndInit();
             this.ResumeLayout(false);
