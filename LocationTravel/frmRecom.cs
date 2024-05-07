@@ -49,7 +49,13 @@ namespace LocationTravel
 
         private void flowLoc_Resize(object sender, EventArgs e)
         {
-           
+            foreach (Control item in flowLoc.Controls)
+            {
+                if(item is CombinationLoc combinationLoc)
+                {
+                   combinationLoc.Width = flowLoc.Width - 15;
+                }
+            }
         }
     }
 }

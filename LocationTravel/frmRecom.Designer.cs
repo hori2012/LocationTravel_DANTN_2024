@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.flowLoc = new System.Windows.Forms.FlowLayoutPanel();
-            this.guna2VScrollBar1 = new Guna.UI2.WinForms.Guna2VScrollBar();
             this.SuspendLayout();
             // 
             // flowLoc
@@ -42,27 +41,12 @@
             this.flowLoc.TabIndex = 0;
             this.flowLoc.Resize += new System.EventHandler(this.flowLoc_Resize);
             // 
-            // guna2VScrollBar1
-            // 
-            this.guna2VScrollBar1.BindingContainer = this.flowLoc;
-            this.guna2VScrollBar1.InUpdate = false;
-            this.guna2VScrollBar1.LargeChange = 1046;
-            this.guna2VScrollBar1.Location = new System.Drawing.Point(1903, 0);
-            this.guna2VScrollBar1.Maximum = 1244;
-            this.guna2VScrollBar1.Name = "guna2VScrollBar1";
-            this.guna2VScrollBar1.ScrollbarSize = 21;
-            this.guna2VScrollBar1.Size = new System.Drawing.Size(21, 1046);
-            this.guna2VScrollBar1.SmallChange = 5;
-            this.guna2VScrollBar1.TabIndex = 1;
-            // 
             // frmRecom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1046);
-            this.Controls.Add(this.guna2VScrollBar1);
             this.Controls.Add(this.flowLoc);
-            this.MinimizeBox = false;
             this.Name = "frmRecom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Recomendation";
@@ -75,6 +59,5 @@
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowLoc;
-        private Guna.UI2.WinForms.Guna2VScrollBar guna2VScrollBar1;
     }
 }

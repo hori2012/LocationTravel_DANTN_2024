@@ -8,5 +8,6 @@ namespace LocationTravel
 {
     internal class ModuleDistance
     {
+
     }
 }

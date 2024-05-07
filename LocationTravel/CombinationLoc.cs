@@ -13,7 +13,6 @@ namespace LocationTravel
     public partial class CombinationLoc : UserControl
     {
         private string name;
-        private int width;
 
         public string NameCombination
         {
@@ -27,6 +26,15 @@ namespace LocationTravel
         public CombinationLoc()
         {
             InitializeComponent();
+        }
+
+        private void dtaGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dtaGrid.Columns[e.ColumnIndex].Name == "colLink")
+            {
+                string url = (string)dtaGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                System.Diagnostics.Process.Start(url);
+            }
         }
     }
 }

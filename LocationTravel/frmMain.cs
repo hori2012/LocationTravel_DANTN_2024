@@ -82,21 +82,68 @@ namespace LocationTravel
             }
             else
             {
-                errorCheck.SetError(txtPrice, "");
-                listCbHotels.ClearSelected();
-                listCbFoods.ClearSelected();
-                listCbPlay.ClearSelected();
-                listCbCoffee.ClearSelected();
-                _cost = decimal.Parse(txtPrice.Text);
-                var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue);
-                int i = 1;
-                foreach (var item in location)
+                if ((int)comTimeTravel.SelectedValue == 1)
                 {
-                    using (MemoryStream ms = new MemoryStream(item.Image))
+                    DialogResult dialog = MessageBox.Show("Có muốn gợi ý hạng mục lưu trú không ?", "Thông báo", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.No)
                     {
-                        Image img = Image.FromStream(ms);
-                        dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
-                        i++;
+                        errorCheck.SetError(txtPrice, "");
+                        listCbHotels.ClearSelected();
+                        listCbFoods.ClearSelected();
+                        listCbPlay.ClearSelected();
+                        listCbCoffee.ClearSelected();
+                        _cost = decimal.Parse(txtPrice.Text);
+                        var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue && x.TypeId != 1);
+                        int i = 1;
+                        foreach (var item in location)
+                        {
+                            using (MemoryStream ms = new MemoryStream(item.Image))
+                            {
+                                Image img = Image.FromStream(ms);
+                                dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
+                                i++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        errorCheck.SetError(txtPrice, "");
+                        listCbHotels.ClearSelected();
+                        listCbFoods.ClearSelected();
+                        listCbPlay.ClearSelected();
+                        listCbCoffee.ClearSelected();
+                        _cost = decimal.Parse(txtPrice.Text);
+                        var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue);
+                        int i = 1;
+                        foreach (var item in location)
+                        {
+                            using (MemoryStream ms = new MemoryStream(item.Image))
+                            {
+                                Image img = Image.FromStream(ms);
+                                dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
+                                i++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    errorCheck.SetError(txtPrice, "");
+                    listCbHotels.ClearSelected();
+                    listCbFoods.ClearSelected();
+                    listCbPlay.ClearSelected();
+                    listCbCoffee.ClearSelected();
+                    _cost = decimal.Parse(txtPrice.Text);
+                    var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue);
+                    int i = 1;
+                    foreach (var item in location)
+                    {
+                        using (MemoryStream ms = new MemoryStream(item.Image))
+                        {
+                            Image img = Image.FromStream(ms);
+                            dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
+                            i++;
+                        }
                     }
                 }
             }
@@ -225,6 +272,7 @@ namespace LocationTravel
                     numFoods = foods.Count > 4 ? numFoods : foods.Count;
                     numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
                     numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
+                    //MessageBox.Show(hotels.Count + "\n" + foods.Count + "\n" + entertains.Count + "\n" + coffees.Count);
                     combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
                     if (combinations.Count != 0)
                     {

@@ -10,17 +10,17 @@ namespace LocationTravel
     {
         public static List<List<Item>> FindCombinations(List<Item> hotels, List<Item> foods, List<Item> entertains, List<Item> coffees, int numHotel, int numFood, int numEntertain, int numCoffee, decimal maxCost)
         {
-            hotels = hotels.OrderBy(h => h.Cost).ToList();
-            foods = foods.OrderBy(h => h.Cost).ToList();
-            entertains = entertains.OrderBy(h => h.Cost).ToList();
-            coffees = coffees.OrderBy(h => h.Cost).ToList();
             List<List<Item>> combinations = new List<List<Item>>();
-            List<List<Item>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-            List<List<Item>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-            List<List<Item>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-            List<List<Item>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-            if (numHotel > 0)
+            if (numHotel != 0)
             {
+                hotels = hotels.OrderBy(h => h.Cost).ToList();
+                foods = foods.OrderBy(h => h.Cost).ToList();
+                entertains = entertains.OrderBy(h => h.Cost).ToList();
+                coffees = coffees.OrderBy(h => h.Cost).ToList();
+                List<List<Item>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<Item>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<Item>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<Item>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
                 foreach (var hotel in hotelsCombination)
                 {
                     foreach (var food in foodsCombination)
@@ -46,6 +46,12 @@ namespace LocationTravel
             }
             else
             {
+                foods = foods.OrderBy(h => h.Cost).ToList();
+                entertains = entertains.OrderBy(h => h.Cost).ToList();
+                coffees = coffees.OrderBy(h => h.Cost).ToList();
+                List<List<Item>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<Item>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<Item>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
                 foreach (var food in foodsCombination)
                 {
                     foreach (var entertain in entertainCombination)
