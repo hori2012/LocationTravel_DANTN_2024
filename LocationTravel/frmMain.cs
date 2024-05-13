@@ -245,19 +245,19 @@ namespace LocationTravel
                 {
                     if (item.TypeId == 1)
                     {
-                        hotels.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        hotels.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                     else if (item.TypeId == 2)
                     {
-                        foods.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        foods.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                     else if (item.TypeId == 3)
                     {
-                        entertains.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        entertains.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                     else
                     {
-                        coffees.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        coffees.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                 }
                 int numHotel = 0, numFoods = 0, numEntertain = 0, numCoffee = 0;
@@ -273,13 +273,14 @@ namespace LocationTravel
                     numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
                     numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
                     //combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).ToList();
+                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost);
+                    combinations = ModuleDistance.CombinationFilter(combinations, 5).OrderBy(x=> Guid.NewGuid()).Take(20).ToList();
                     if (combinations.Count != 0)
                     {
                         Debug.WriteLine("Tổ hợp địa điểm: \n");
                         foreach (var item in combinations)
                         {
-                            Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
+                            Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Latitude}")));
                         }
                         frmRecom form = new frmRecom(combinations);
                         form.ShowDialog();
