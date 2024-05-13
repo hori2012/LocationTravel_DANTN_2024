@@ -237,31 +237,31 @@ namespace LocationTravel
 
                     listLocation.AddRange(location);
                 }
-                List<Item> hotels = new List<Item>();
-                List<Item> foods = new List<Item>();
-                List<Item> entertains = new List<Item>();
-                List<Item> coffees = new List<Item>();
+                List<ItemLoc> hotels = new List<ItemLoc>();
+                List<ItemLoc> foods = new List<ItemLoc>();
+                List<ItemLoc> entertains = new List<ItemLoc>();
+                List<ItemLoc> coffees = new List<ItemLoc>();
                 foreach (var item in listLocation)
                 {
                     if (item.TypeId == 1)
                     {
-                        hotels.Add(new Item() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        hotels.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
                     }
                     else if (item.TypeId == 2)
                     {
-                        foods.Add(new Item() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        foods.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
                     }
                     else if (item.TypeId == 3)
                     {
-                        entertains.Add(new Item() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        entertains.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
                     }
                     else
                     {
-                        coffees.Add(new Item() { Id = item.LocationId, Cost = (decimal)item.Cost });
+                        coffees.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost });
                     }
                 }
                 int numHotel = 0, numFoods = 0, numEntertain = 0, numCoffee = 0;
-                List<List<Item>> combinations = new List<List<Item>>();
+                List<List<ItemLoc>> combinations = new List<List<ItemLoc>>();
                 if ((int)comTimeTravel.SelectedValue == 1)
                 {
                     numHotel = 1;
@@ -272,8 +272,8 @@ namespace LocationTravel
                     numFoods = foods.Count > 4 ? numFoods : foods.Count;
                     numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
                     numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
-                    //MessageBox.Show(hotels.Count + "\n" + foods.Count + "\n" + entertains.Count + "\n" + coffees.Count);
-                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                    //combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).ToList();
                     if (combinations.Count != 0)
                     {
                         Debug.WriteLine("Tổ hợp địa điểm: \n");

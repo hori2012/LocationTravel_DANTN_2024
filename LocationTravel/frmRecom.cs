@@ -16,8 +16,8 @@ namespace LocationTravel
     public partial class frmRecom : Form
     {
         private ModelRecommendation modelRecommendation;
-        private List<List<Item>> listItems;
-        public frmRecom(List<List<Item>> list)
+        private List<List<ItemLoc>> listItems;
+        public frmRecom(List<List<ItemLoc>> list)
         {
             InitializeComponent();
             this.listItems = list;
@@ -26,11 +26,12 @@ namespace LocationTravel
         private void frmRecom_Load(object sender, EventArgs e)
         {
             modelRecommendation = new ModelRecommendation();
+            listItems = listItems.OrderBy(item=> item.Sum(x => x.Cost)).ToList();
             int i = 1;
             foreach (var item in listItems)
             {
                 CombinationLoc combinationLoc = new CombinationLoc();
-                combinationLoc.NameCombination = "Gợi ý " + i;
+                combinationLoc.NameCombination = "Gợi ý " + i + " - Tổng chi phí: " + item.Sum(x => x.Cost).ToString("N0", new CultureInfo("vi-VN")) + " VND";
                 i++;
                 var allLocations = item.SelectMany(element => modelRecommendation.Locations.Where(x => x.LocationId == element.Id));
                 int j = 1;
@@ -51,9 +52,9 @@ namespace LocationTravel
         {
             foreach (Control item in flowLoc.Controls)
             {
-                if(item is CombinationLoc combinationLoc)
+                if (item is CombinationLoc combinationLoc)
                 {
-                   combinationLoc.Width = flowLoc.Width - 15;
+                    combinationLoc.Width = flowLoc.Width - 15;
                 }
             }
         }

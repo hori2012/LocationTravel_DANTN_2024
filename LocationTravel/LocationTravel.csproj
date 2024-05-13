@@ -85,6 +85,7 @@
     <Compile Include="frmRecom.Designer.cs">
       <DependentUpon>frmRecom.cs</DependentUpon>
     </Compile>
+    <Compile Include="ItemLoc.cs" />
     <Compile Include="Model\Area.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\ModelRecommendation.cs" />

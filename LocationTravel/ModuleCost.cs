@@ -8,19 +8,19 @@ namespace LocationTravel
 {
     internal class ModuleCost
     {
-        public static List<List<Item>> FindCombinations(List<Item> hotels, List<Item> foods, List<Item> entertains, List<Item> coffees, int numHotel, int numFood, int numEntertain, int numCoffee, decimal maxCost)
+        public static List<List<ItemLoc>> FindCombinations(List<ItemLoc> hotels, List<ItemLoc> foods, List<ItemLoc> entertains, List<ItemLoc> coffees, int numHotel, int numFood, int numEntertain, int numCoffee, decimal maxCost)
         {
-            List<List<Item>> combinations = new List<List<Item>>();
+            List<List<ItemLoc>> combinations = new List<List<ItemLoc>>();
             if (numHotel != 0)
             {
                 hotels = hotels.OrderBy(h => h.Cost).ToList();
                 foods = foods.OrderBy(h => h.Cost).ToList();
                 entertains = entertains.OrderBy(h => h.Cost).ToList();
                 coffees = coffees.OrderBy(h => h.Cost).ToList();
-                List<List<Item>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<Item>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<Item>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<Item>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
                 foreach (var hotel in hotelsCombination)
                 {
                     foreach (var food in foodsCombination)
@@ -29,12 +29,11 @@ namespace LocationTravel
                         {
                             foreach (var coffee in coffeesCombination)
                             {
-                                var combination = new List<Item>();
+                                var combination = new List<ItemLoc>();
                                 combination.AddRange(hotel);
                                 combination.AddRange(food);
                                 combination.AddRange(entertain);
                                 combination.AddRange(coffee);
-
                                 if (combination.Sum(item => item.Cost) <= maxCost)
                                 {
                                     combinations.Add(combination);
@@ -49,20 +48,19 @@ namespace LocationTravel
                 foods = foods.OrderBy(h => h.Cost).ToList();
                 entertains = entertains.OrderBy(h => h.Cost).ToList();
                 coffees = coffees.OrderBy(h => h.Cost).ToList();
-                List<List<Item>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<Item>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<Item>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
                 foreach (var food in foodsCombination)
                 {
                     foreach (var entertain in entertainCombination)
                     {
                         foreach (var coffee in coffeesCombination)
                         {
-                            var combination = new List<Item>();
+                            var combination = new List<ItemLoc>();
                             combination.AddRange(food);
                             combination.AddRange(entertain);
                             combination.AddRange(coffee);
-
                             if (combination.Sum(item => item.Cost) <= maxCost)
                             {
                                 combinations.Add(combination);
@@ -73,14 +71,14 @@ namespace LocationTravel
             }
             return combinations;
         }
-        public static List<List<Item>> GetCombinations(List<Item> list, int length)
+        public static List<List<ItemLoc>> GetCombinations(List<ItemLoc> list, int length)
         {
-            var result = new List<List<Item>>();
+            var result = new List<List<ItemLoc>>();
             if (length == 1)
             {
                 foreach (var item in list)
                 {
-                    result.Add(new List<Item> { item });
+                    result.Add(new List<ItemLoc> { item });
                 }
                 return result;
             }
@@ -91,7 +89,7 @@ namespace LocationTravel
                     var smallerCombinations = GetCombinations(list.Skip(i + 1).ToList(), length - 1);
                     foreach (var values in smallerCombinations)
                     {
-                        var combination = new List<Item> { list[i] };
+                        var combination = new List<ItemLoc> { list[i] };
                         combination.AddRange(values);
                         result.Add(combination);
                     }
@@ -99,11 +97,5 @@ namespace LocationTravel
                 return result;
             }
         }
-    }
-    public class Item
-    {
-        public int Id { get; set; }
-        public decimal Cost { get; set; }
-
     }
 }

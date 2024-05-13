@@ -32,6 +32,10 @@ namespace LocationTravel.Model
 
         public int? TypeId { get; set; }
 
+        public double? Latitude { get; set; }
+
+        public double? Longitude { get; set; }
+
         public virtual Area Area { get; set; }
 
         public virtual TypeLocation TypeLocation { get; set; }
