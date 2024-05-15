@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +11,8 @@ namespace LocationTravel
     internal class ModuleDistance
     {
         const double R = 6371; // Earth’s radius 
+        const string BingKey = "2l1NGkhCrivYeFEnlbza~_M8py2jyFINioFJpwtSDeA~AtLJe7rpNkl9EypW9K2nmWAlEp7TEaWInCfVlITyJtqrY4UdqnIZgLNe_O736GUZ"; //Your Bing Map Key
+        static readonly HttpClient client = new HttpClient();
         public static double CalculateDistance_Haversine(ItemLoc loc1, ItemLoc loc2)
         {
             double dLat = ToRadians(loc1.Latitude - loc2.Latitude);
@@ -54,26 +58,29 @@ namespace LocationTravel
             }
             return result;
         }
-
-        public static bool IsCheckValidCombinations(List<ItemLoc> combinations, double maxDistance)
+        public static double[,] GenerateMatrix(int numRow_Col, string responseBody)
         {
-            bool isValid = true;
-            for (int i = 0; i < combinations.Count; i++)
+            double[,] matrix = new double[numRow_Col, numRow_Col];
+
+            return matrix;
+        }
+        public static async Task<string> ConnectionApi(List<ItemLoc> locations)
+        {
+            string origins = string.Join(";", locations.Select(loc => $"{loc.Latitude},{loc.Longitude}"));
+            string destinations = origins; // Assuming you want a distance matrix between all locations
+            string requestUri = $"https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins={origins}&destinations={destinations}&travelMode=driving&key={BingKey}";
+            HttpResponseMessage response = await client.GetAsync(requestUri);
+            string responseBody = "";
+            if (response.IsSuccessStatusCode)
             {
-                for (int j = i + 1; j < combinations.Count; j++)
-                {
-                    if (CalculateDistance_Haversine(combinations[i], combinations[j]) > maxDistance)
-                    {
-                        isValid = false;
-                        break;
-                    }
-                }
-                if (isValid == false)
-                {
-                    break;
-                }
+                responseBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseBody);
             }
-            return isValid;
+            else
+            {
+                Console.WriteLine($"Error: {response.StatusCode}");
+            }
+            return responseBody;
         }
     }
 }

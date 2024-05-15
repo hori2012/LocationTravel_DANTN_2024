@@ -26,6 +26,7 @@ namespace LocationTravel
         private void frmRecom_Load(object sender, EventArgs e)
         {
             modelRecommendation = new ModelRecommendation();
+            listItems = listItems.OrderBy(x=> Guid.NewGuid()).Take(25).ToList();
             listItems = listItems.OrderBy(item=> item.Sum(x => x.Cost)).ToList();
             int i = 1;
             foreach (var item in listItems)

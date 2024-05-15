@@ -139,7 +139,6 @@
             this.colId.MinimumWidth = 6;
             this.colId.Name = "colId";
             this.colId.ReadOnly = true;
-            this.colId.Visible = false;
             // 
             // colArea
             // 

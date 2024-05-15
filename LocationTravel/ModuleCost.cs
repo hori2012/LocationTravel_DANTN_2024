@@ -17,10 +17,10 @@ namespace LocationTravel
                 foods = foods.OrderBy(h => h.Cost).ToList();
                 entertains = entertains.OrderBy(h => h.Cost).ToList();
                 coffees = coffees.OrderBy(h => h.Cost).ToList();
-                List<List<ItemLoc>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<ItemLoc>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<ItemLoc>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<ItemLoc>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> hotelsCombination = GetCombinations(hotels, numHotel).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
+                List<List<ItemLoc>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
+                List<List<ItemLoc>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
+                List<List<ItemLoc>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
                 foreach (var hotel in hotelsCombination)
                 {
                     foreach (var food in foodsCombination)
@@ -48,9 +48,9 @@ namespace LocationTravel
                 foods = foods.OrderBy(h => h.Cost).ToList();
                 entertains = entertains.OrderBy(h => h.Cost).ToList();
                 coffees = coffees.OrderBy(h => h.Cost).ToList();
-                List<List<ItemLoc>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<ItemLoc>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
-                List<List<ItemLoc>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                List<List<ItemLoc>> foodsCombination = GetCombinations(foods, numFood).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
+                List<List<ItemLoc>> entertainCombination = GetCombinations(entertains, numEntertain).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
+                List<List<ItemLoc>> coffeesCombination = GetCombinations(coffees, numCoffee).OrderBy(x => Guid.NewGuid()).Take(25).ToList();
                 foreach (var food in foodsCombination)
                 {
                     foreach (var entertain in entertainCombination)

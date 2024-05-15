@@ -272,12 +272,11 @@ namespace LocationTravel
                     numFoods = foods.Count > 4 ? numFoods : foods.Count;
                     numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
                     numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
-                    //combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
                     combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost);
-                    combinations = ModuleDistance.CombinationFilter(combinations, 5).OrderBy(x=> Guid.NewGuid()).Take(20).ToList();
+                    combinations = ModuleDistance.CombinationFilter(combinations, 5);
                     if (combinations.Count != 0)
                     {
-                        Debug.WriteLine("Tổ hợp địa điểm: \n");
+                        Debug.WriteLine("Tổ hợp địa điểm (Số lượng tổ hợp - {0}):", combinations.Count);
                         foreach (var item in combinations)
                         {
                             Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Latitude}")));
@@ -300,10 +299,11 @@ namespace LocationTravel
                     numFoods = foods.Count > 4 ? numFoods : foods.Count;
                     numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
                     numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
-                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost).OrderBy(x => Guid.NewGuid()).Take(20).ToList();
+                    combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost);
+                    combinations = ModuleDistance.CombinationFilter(combinations, 5);
                     if (combinations.Count != 0)
                     {
-                        Debug.WriteLine("Tổ hợp địa điểm: \n");
+                        Debug.WriteLine("Tổ hợp địa điểm (Số lượng tổ hợp - {0}):", combinations.Count);
                         foreach (var item in combinations)
                         {
                             Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
