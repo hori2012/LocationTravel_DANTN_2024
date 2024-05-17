@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
@@ -74,11 +75,10 @@ namespace LocationTravel
             if (response.IsSuccessStatusCode)
             {
                 responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody);
             }
             else
             {
-                Console.WriteLine($"Error: {response.StatusCode}");
+                Debug.WriteLine($"Error: {response.StatusCode}");
             }
             return responseBody;
         }

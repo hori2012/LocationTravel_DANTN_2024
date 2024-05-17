@@ -93,14 +93,14 @@ namespace LocationTravel
                         listCbPlay.ClearSelected();
                         listCbCoffee.ClearSelected();
                         _cost = decimal.Parse(txtPrice.Text);
-                        var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue && x.TypeId != 1);
+                        var location = modelRecommendation.Locations.Where(x => x.Cost * numUpDown.Value <= _cost && x.AreaId == (int)comArea.SelectedValue && x.TypeId != 1);
                         int i = 1;
                         foreach (var item in location)
                         {
                             using (MemoryStream ms = new MemoryStream(item.Image))
                             {
                                 Image img = Image.FromStream(ms);
-                                dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
+                                dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, (item.Cost.Value * numUpDown.Value).ToString("N0", new CultureInfo("vi-VN")) + " VND");
                                 i++;
                             }
                         }
@@ -113,14 +113,14 @@ namespace LocationTravel
                         listCbPlay.ClearSelected();
                         listCbCoffee.ClearSelected();
                         _cost = decimal.Parse(txtPrice.Text);
-                        var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue);
+                        var location = modelRecommendation.Locations.Where(x => x.Cost * numUpDown.Value <= _cost && x.AreaId == (int)comArea.SelectedValue);
                         int i = 1;
                         foreach (var item in location)
                         {
                             using (MemoryStream ms = new MemoryStream(item.Image))
                             {
                                 Image img = Image.FromStream(ms);
-                                dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
+                                dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, (item.Cost.Value * numUpDown.Value).ToString("N0", new CultureInfo("vi-VN")) + " VND");
                                 i++;
                             }
                         }
@@ -134,14 +134,14 @@ namespace LocationTravel
                     listCbPlay.ClearSelected();
                     listCbCoffee.ClearSelected();
                     _cost = decimal.Parse(txtPrice.Text);
-                    var location = modelRecommendation.Locations.Where(x => x.Cost <= _cost && x.AreaId == (int)comArea.SelectedValue);
+                    var location = modelRecommendation.Locations.Where(x => x.Cost * numUpDown.Value <= _cost && x.AreaId == (int)comArea.SelectedValue);
                     int i = 1;
                     foreach (var item in location)
                     {
                         using (MemoryStream ms = new MemoryStream(item.Image))
                         {
                             Image img = Image.FromStream(ms);
-                            dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, item.Cost.Value.ToString("N0", new CultureInfo("vi-VN")) + " VND");
+                            dtaGrid.Rows.Add(i, item.LocationId, item.TypeLocation.NameType, item.SpecificType, img, item.NameLocation, item.Address, item.Description, item.Link, (item.Cost.Value * numUpDown.Value).ToString("N0", new CultureInfo("vi-VN")) + " VND");
                             i++;
                         }
                     }
@@ -227,7 +227,7 @@ namespace LocationTravel
         {
             if (!string.IsNullOrEmpty(txtPrice.Text) && dtaGrid.Rows.Count > 0)
             {
-                _cost = decimal.Parse(txtPrice.Text);
+                //_cost = decimal.Parse(txtPrice.Text);
                 List<Location> listLocation = new List<Location>();
                 foreach (DataGridViewRow row in dtaGrid.Rows)
                 {
@@ -245,19 +245,19 @@ namespace LocationTravel
                 {
                     if (item.TypeId == 1)
                     {
-                        hotels.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
+                        hotels.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost * numUpDown.Value, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                     else if (item.TypeId == 2)
                     {
-                        foods.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
+                        foods.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost * numUpDown.Value, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                     else if (item.TypeId == 3)
                     {
-                        entertains.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
+                        entertains.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost * numUpDown.Value, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                     else
                     {
-                        coffees.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
+                        coffees.Add(new ItemLoc() { Id = item.LocationId, Cost = (decimal)item.Cost * numUpDown.Value, Latitude = (double)item.Latitude, Longitude = (double)item.Longitude });
                     }
                 }
                 int numHotel = 0, numFoods = 0, numEntertain = 0, numCoffee = 0;
@@ -281,7 +281,7 @@ namespace LocationTravel
                         {
                             Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Latitude}")));
                         }
-                        frmRecom form = new frmRecom(combinations);
+                        frmRecom form = new frmRecom(combinations, numUpDown.Value);
                         form.ShowDialog();
                     }
                     else
@@ -308,7 +308,7 @@ namespace LocationTravel
                         {
                             Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
                         }
-                        frmRecom form = new frmRecom(combinations);
+                        frmRecom form = new frmRecom(combinations, numUpDown.Value);
                         form.ShowDialog();
                     }
                     else

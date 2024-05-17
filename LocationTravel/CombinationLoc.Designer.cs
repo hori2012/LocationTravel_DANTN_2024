@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CombinationLoc));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupLoc = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.picDistance = new Guna.UI2.WinForms.Guna2PictureBox();
             this.dtaGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,12 +45,14 @@
             this.colLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupLoc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtaGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // groupLoc
             // 
             this.groupLoc.BorderRadius = 5;
+            this.groupLoc.Controls.Add(this.picDistance);
             this.groupLoc.Controls.Add(this.dtaGrid);
             this.groupLoc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupLoc.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -58,6 +62,21 @@
             this.groupLoc.Size = new System.Drawing.Size(1894, 389);
             this.groupLoc.TabIndex = 0;
             this.groupLoc.Text = "Gợi ý 1";
+            // 
+            // picDistance
+            // 
+            this.picDistance.BackColor = System.Drawing.Color.Transparent;
+            this.picDistance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picDistance.FillColor = System.Drawing.Color.Transparent;
+            this.picDistance.Image = ((System.Drawing.Image)(resources.GetObject("picDistance.Image")));
+            this.picDistance.ImageRotate = 0F;
+            this.picDistance.Location = new System.Drawing.Point(1844, 3);
+            this.picDistance.Name = "picDistance";
+            this.picDistance.Size = new System.Drawing.Size(37, 31);
+            this.picDistance.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picDistance.TabIndex = 2;
+            this.picDistance.TabStop = false;
+            this.picDistance.UseTransparentBackground = true;
             // 
             // dtaGrid
             // 
@@ -139,6 +158,7 @@
             this.colId.MinimumWidth = 6;
             this.colId.Name = "colId";
             this.colId.ReadOnly = true;
+            this.colId.Visible = false;
             // 
             // colArea
             // 
@@ -203,6 +223,7 @@
             this.Name = "CombinationLoc";
             this.Size = new System.Drawing.Size(1894, 389);
             this.groupLoc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtaGrid)).EndInit();
             this.ResumeLayout(false);
 
@@ -212,6 +233,7 @@
 
         private Guna.UI2.WinForms.Guna2GroupBox groupLoc;
         private Guna.UI2.WinForms.Guna2DataGridView dtaGrid;
+        private Guna.UI2.WinForms.Guna2PictureBox picDistance;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSTT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colArea;
