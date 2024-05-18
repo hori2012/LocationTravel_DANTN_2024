@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LocationTravel.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -59,13 +61,8 @@ namespace LocationTravel
             }
             return result;
         }
-        public static double[,] GenerateMatrix(int numRow_Col, string responseBody)
-        {
-            double[,] matrix = new double[numRow_Col, numRow_Col];
-
-            return matrix;
-        }
-        public static async Task<string> ConnectionApi(List<ItemLoc> locations)
+        //Bing maps API
+        public static async Task<DistanceMatrix> ConnectionApi(List<ItemLoc> locations)
         {
             string origins = string.Join(";", locations.Select(loc => $"{loc.Latitude},{loc.Longitude}"));
             string destinations = origins; // Assuming you want a distance matrix between all locations
@@ -75,12 +72,21 @@ namespace LocationTravel
             if (response.IsSuccessStatusCode)
             {
                 responseBody = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(response.StatusCode);
+                DistanceMatrix distanceMatrix = JsonConvert.DeserializeObject<DistanceMatrix>(responseBody);
+                return distanceMatrix;
             }
             else
             {
                 Debug.WriteLine($"Error: {response.StatusCode}");
             }
-            return responseBody;
+            return null;
+        }
+        public static async Task<List<ItemLoc>> GetLocations_Dijkstra(List<ItemLoc> locations)
+        {
+            var result = new List<ItemLoc>();
+            DistanceMatrix matrix = await ConnectionApi(locations);
+            return result;
         }
     }
 }

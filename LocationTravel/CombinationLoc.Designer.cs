@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupLoc = new Guna.UI2.WinForms.Guna2GroupBox();
-            this.picDistance = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.btnDistance = new Guna.UI2.WinForms.Guna2Button();
             this.dtaGrid = new Guna.UI2.WinForms.Guna2DataGridView();
             this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,14 +45,13 @@
             this.colLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupLoc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtaGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // groupLoc
             // 
             this.groupLoc.BorderRadius = 5;
-            this.groupLoc.Controls.Add(this.picDistance);
+            this.groupLoc.Controls.Add(this.btnDistance);
             this.groupLoc.Controls.Add(this.dtaGrid);
             this.groupLoc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupLoc.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -63,20 +62,27 @@
             this.groupLoc.TabIndex = 0;
             this.groupLoc.Text = "Gợi ý 1";
             // 
-            // picDistance
+            // btnDistance
             // 
-            this.picDistance.BackColor = System.Drawing.Color.Transparent;
-            this.picDistance.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picDistance.FillColor = System.Drawing.Color.Transparent;
-            this.picDistance.Image = ((System.Drawing.Image)(resources.GetObject("picDistance.Image")));
-            this.picDistance.ImageRotate = 0F;
-            this.picDistance.Location = new System.Drawing.Point(1844, 3);
-            this.picDistance.Name = "picDistance";
-            this.picDistance.Size = new System.Drawing.Size(37, 31);
-            this.picDistance.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picDistance.TabIndex = 2;
-            this.picDistance.TabStop = false;
-            this.picDistance.UseTransparentBackground = true;
+            this.btnDistance.BackColor = System.Drawing.Color.Transparent;
+            this.btnDistance.BorderRadius = 5;
+            this.btnDistance.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDistance.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDistance.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDistance.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDistance.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDistance.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnDistance.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDistance.ForeColor = System.Drawing.Color.White;
+            this.btnDistance.Image = ((System.Drawing.Image)(resources.GetObject("btnDistance.Image")));
+            this.btnDistance.ImageAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnDistance.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnDistance.Location = new System.Drawing.Point(1702, 5);
+            this.btnDistance.Name = "btnDistance";
+            this.btnDistance.Size = new System.Drawing.Size(180, 33);
+            this.btnDistance.TabIndex = 3;
+            this.btnDistance.Text = "Đường đi";
+            this.btnDistance.Click += new System.EventHandler(this.btnDistance_Click);
             // 
             // dtaGrid
             // 
@@ -223,7 +229,6 @@
             this.Name = "CombinationLoc";
             this.Size = new System.Drawing.Size(1894, 389);
             this.groupLoc.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtaGrid)).EndInit();
             this.ResumeLayout(false);
 
@@ -233,7 +238,6 @@
 
         private Guna.UI2.WinForms.Guna2GroupBox groupLoc;
         private Guna.UI2.WinForms.Guna2DataGridView dtaGrid;
-        private Guna.UI2.WinForms.Guna2PictureBox picDistance;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSTT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colArea;
@@ -243,5 +247,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.DataGridViewLinkColumn colLink;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCost;
+        private Guna.UI2.WinForms.Guna2Button btnDistance;
     }
 }
