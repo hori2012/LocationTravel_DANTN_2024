@@ -16,6 +16,7 @@ namespace LocationTravel
         const double R = 6371; // Earth’s radius 
         const string BingKey = "2l1NGkhCrivYeFEnlbza~_M8py2jyFINioFJpwtSDeA~AtLJe7rpNkl9EypW9K2nmWAlEp7TEaWInCfVlITyJtqrY4UdqnIZgLNe_O736GUZ"; //Your Bing Map Key
         static readonly HttpClient client = new HttpClient();
+        //Haversine
         public static double CalculateDistance_Haversine(ItemLoc loc1, ItemLoc loc2)
         {
             double dLat = ToRadians(loc1.Latitude - loc2.Latitude);
@@ -62,9 +63,10 @@ namespace LocationTravel
             return result;
         }
         //Bing maps API
-        public static async Task<DistanceMatrix> ConnectionApi(List<ItemLoc> locations)
+        public static async Task<double[,]> ConnectionAPI_DisatanceMatrix(List<ItemLoc> locations)
         {
             string origins = string.Join(";", locations.Select(loc => $"{loc.Latitude},{loc.Longitude}"));
+            Debug.WriteLine(origins);
             string destinations = origins; // Assuming you want a distance matrix between all locations
             string requestUri = $"https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins={origins}&destinations={destinations}&travelMode=driving&key={BingKey}";
             HttpResponseMessage response = await client.GetAsync(requestUri);
@@ -72,9 +74,31 @@ namespace LocationTravel
             if (response.IsSuccessStatusCode)
             {
                 responseBody = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(response.StatusCode);
                 DistanceMatrix distanceMatrix = JsonConvert.DeserializeObject<DistanceMatrix>(responseBody);
-                return distanceMatrix;
+                double[,] matrix = new double[locations.Count, locations.Count];
+                if (distanceMatrix != null)
+                {
+                    foreach (var resourceset in distanceMatrix.ResourceSets)
+                    {
+                        foreach (var resource in resourceset.Resources)
+                        {
+                            for (int i = 0; i < locations.Count; i++)
+                            {
+                                int j = 0;
+                                foreach (var result in resource.Results.Where(x => x.OriginIndex == i).ToList())
+                                {
+                                    matrix[i, j] = result.TravelDistance;
+                                    j++;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("Data connect API return --> NULL");
+                }
+                return matrix;
             }
             else
             {
@@ -82,10 +106,13 @@ namespace LocationTravel
             }
             return null;
         }
-        public static async Task<List<ItemLoc>> GetLocations_Dijkstra(List<ItemLoc> locations)
+
+        //dijkstra algorithm
+        public static async Task<List<int>> GetLocations_Dijkstra(List<ItemLoc> locations)
         {
-            var result = new List<ItemLoc>();
-            DistanceMatrix matrix = await ConnectionApi(locations);
+            var result = new List<int>();
+            double[,] matrix = await ConnectionAPI_DisatanceMatrix(locations);
+
             return result;
         }
     }

@@ -52,8 +52,7 @@ namespace LocationTravel
                 listLocation.Add(itemloc);
             }
             //Handle shortest path finding here.
-            DistanceMatrix distanceMatrix = await ModuleDistance.ConnectionApi(listLocation);
-            if (distanceMatrix != null) { Debug.WriteLine("Not null"); }
+            
         }
     }
 }
