@@ -51,8 +51,6 @@ namespace LocationTravel
                 ItemLoc itemloc = new ItemLoc() { Id = location.LocationId, Cost = (decimal)location.Cost, Latitude = (double)location.Latitude, Longitude = (double)location.Longitude };
                 listLocation.Add(itemloc);
             }
-            //Handle shortest path finding here.
-            
         }
     }
 }

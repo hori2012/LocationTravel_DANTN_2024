@@ -63,6 +63,7 @@ namespace LocationTravel
             return result;
         }
         //Bing maps API
+        //Get distance bettween location
         public static async Task<double[,]> ConnectionAPI_DisatanceMatrix(List<ItemLoc> locations)
         {
             string origins = string.Join(";", locations.Select(loc => $"{loc.Latitude},{loc.Longitude}"));
@@ -106,13 +107,12 @@ namespace LocationTravel
             }
             return null;
         }
-
-        //dijkstra algorithm
+        ////Handle shortest path finding here.
         public static async Task<List<int>> GetLocations_Dijkstra(List<ItemLoc> locations)
         {
             var result = new List<int>();
             double[,] matrix = await ConnectionAPI_DisatanceMatrix(locations);
-
+            result = AlgorithmDijkstra.Dijkstra()
             return result;
         }
     }
