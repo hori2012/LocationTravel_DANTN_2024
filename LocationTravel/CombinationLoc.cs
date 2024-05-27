@@ -51,6 +51,15 @@ namespace LocationTravel
                 ItemLoc itemloc = new ItemLoc() { Id = location.LocationId, Cost = (decimal)location.Cost, Latitude = (double)location.Latitude, Longitude = (double)location.Longitude };
                 listLocation.Add(itemloc);
             }
+            List<ItemLoc> distanceAnt = new List<ItemLoc>();
+            distanceAnt = await ModuleDistance.GetLocations_AntAlgorithm(listLocation);
+            Debug.Write("Trip: ");
+            foreach (ItemLoc itemloc in distanceAnt)
+            {
+                Debug.Write(itemloc.Id + " -> ");
+            }
+
+            Debug.Write(distanceAnt[0].Id + "\n");
         }
     }
 }

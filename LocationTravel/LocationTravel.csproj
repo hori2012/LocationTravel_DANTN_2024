@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlgorithmDijkstra.cs" />
+    <Compile Include="AntAlgorithm.cs" />
     <Compile Include="CombinationLoc.cs">
       <SubType>UserControl</SubType>
     </Compile>

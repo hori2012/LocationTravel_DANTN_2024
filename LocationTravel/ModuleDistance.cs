@@ -16,14 +16,18 @@ namespace LocationTravel
         const double R = 6371; // Earth’s radius 
         const string BingKey = "2l1NGkhCrivYeFEnlbza~_M8py2jyFINioFJpwtSDeA~AtLJe7rpNkl9EypW9K2nmWAlEp7TEaWInCfVlITyJtqrY4UdqnIZgLNe_O736GUZ"; //Your Bing Map Key
         static readonly HttpClient client = new HttpClient();
-        //Haversine
+
+        /// <summary>
+        /// Fomula Haversine 
+        /// </summary>
+        /// <returns></returns>
         public static double CalculateDistance_Haversine(ItemLoc loc1, ItemLoc loc2)
         {
             double dLat = ToRadians(loc1.Latitude - loc2.Latitude);
             double dLon = ToRadians(loc1.Longitude - loc2.Longitude);
             double lat1 = ToRadians(loc1.Latitude);
             double lat2 = ToRadians(loc2.Latitude);
-            //fomula Haversine
+            //Apply Fomula Haversine
             double a = Math.Pow(Math.Sin(dLat / 2), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin(dLon / 2), 2);
             double c = 2 * Math.Asin(Math.Sqrt(a));
             return Math.Round(R * c, 2);
@@ -62,8 +66,10 @@ namespace LocationTravel
             }
             return result;
         }
-        //Bing maps API
-        //Get distance bettween location
+        /// <summary>
+        /// Bing maps API - Get matrix distance between location
+        /// </summary>
+        /// <returns></returns>
         public static async Task<double[,]> ConnectionAPI_DisatanceMatrix(List<ItemLoc> locations)
         {
             string origins = string.Join(";", locations.Select(loc => $"{loc.Latitude},{loc.Longitude}"));
@@ -107,12 +113,20 @@ namespace LocationTravel
             }
             return null;
         }
-        ////Handle shortest path finding here.
-        public static async Task<List<int>> GetLocations_Dijkstra(List<ItemLoc> locations)
+        /// <summary>
+        /// Handle shortest path finding -- TSP.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<List<ItemLoc>> GetLocations_AntAlgorithm(List<ItemLoc> locations)
         {
-            var result = new List<int>();
+            int[] item = new int[locations.Count];
             double[,] matrix = await ConnectionAPI_DisatanceMatrix(locations);
-            result = AlgorithmDijkstra.Dijkstra()
+            item = AntAlgorithm.Ant_ACO(matrix);
+            List<ItemLoc> result = new List<ItemLoc>();
+            for (int k = 0; k < item.Length; k++)
+            {
+                result.Add(locations[k]);
+            }
             return result;
         }
     }

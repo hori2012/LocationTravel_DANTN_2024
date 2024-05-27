@@ -272,8 +272,10 @@ namespace LocationTravel
                     numFoods = foods.Count > 4 ? numFoods : foods.Count;
                     numEntertain = entertains.Count > 3 ? numEntertain : entertains.Count;
                     numCoffee = coffees.Count > 2 ? numCoffee : coffees.Count;
+                    //Create combinations
                     combinations = ModuleCost.FindCombinations(hotels, foods, entertains, coffees, numHotel, numFoods, numEntertain, numCoffee, _cost);
-                    combinations = ModuleDistance.CombinationFilter(combinations, 5);
+                    //Remove combination where the distance between locations is more than 4km.
+                    combinations = ModuleDistance.CombinationFilter(combinations, 4);
                     if (combinations.Count != 0)
                     {
                         Debug.WriteLine("Tổ hợp địa điểm (Số lượng tổ hợp - {0}):", combinations.Count);

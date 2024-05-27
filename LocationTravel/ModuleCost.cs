@@ -8,6 +8,10 @@ namespace LocationTravel
 {
     internal class ModuleCost
     {
+        /// <summary>
+        /// Create combination where the cost of combination is not more than maxCost
+        /// </summary>
+        /// <returns></returns>
         public static List<List<ItemLoc>> FindCombinations(List<ItemLoc> hotels, List<ItemLoc> foods, List<ItemLoc> entertains, List<ItemLoc> coffees, int numHotel, int numFood, int numEntertain, int numCoffee, decimal maxCost)
         {
             List<List<ItemLoc>> combinations = new List<List<ItemLoc>>();
@@ -71,6 +75,10 @@ namespace LocationTravel
             }
             return combinations;
         }
+        /// <summary>
+        /// Create combiations with a known length
+        /// </summary>
+        /// <returns></returns>
         public static List<List<ItemLoc>> GetCombinations(List<ItemLoc> list, int length)
         {
             var result = new List<List<ItemLoc>>();
