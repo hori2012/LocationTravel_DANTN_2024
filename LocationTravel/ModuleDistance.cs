@@ -27,7 +27,7 @@ namespace LocationTravel
             double dLon = ToRadians(loc1.Longitude - loc2.Longitude);
             double lat1 = ToRadians(loc1.Latitude);
             double lat2 = ToRadians(loc2.Latitude);
-            //Apply Fomula Haversine
+            //Apply Haversine Formula
             double a = Math.Pow(Math.Sin(dLat / 2), 2) + Math.Cos(lat1) * Math.Cos(lat2) * Math.Pow(Math.Sin(dLon / 2), 2);
             double c = 2 * Math.Asin(Math.Sqrt(a));
             return Math.Round(R * c, 2);

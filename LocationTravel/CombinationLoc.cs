@@ -60,6 +60,10 @@ namespace LocationTravel
             }
 
             Debug.Write(distanceAnt[0].Id + "\n");
+            //https://www.bing.com/maps/directions?rtp=adr.10.762622,106.660172~adr.21.028511,105.804817
+            string orgins = string.Join("~", distanceAnt.Select(loc => $"adr.{loc.Latitude},{loc.Longitude}"));
+            string url = $"https://www.bing.com/maps/directions?rtp={orgins}";
+            Process.Start(url);
         }
     }
 }
