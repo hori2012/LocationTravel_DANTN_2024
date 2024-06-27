@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -153,51 +155,77 @@ namespace LocationTravel
         {
             if (dtaGrid.Rows.Count > 0)
             {
-                List<DataGridViewRow> rowsToRemove = new List<DataGridViewRow>();
-                foreach (DataGridViewRow row in dtaGrid.Rows)
+                List<string> TypeRemove = new List<string>();
+                List<DataGridViewRow> rowToRemove = new List<DataGridViewRow>();
+                if (listCbHotels.CheckedItems.Count > 0)
                 {
-                    if (listCbHotels.CheckedItems.Count > 0)
+                    foreach (var check in listCbHotels.CheckedItems)
                     {
-                        foreach (var check in listCbHotels.CheckedItems)
+                        if (TypeRemove.Contains(check.ToString()) == false)
                         {
-                            if (String.Compare(check.ToString(), row.Cells["colType"].Value.ToString()) != 0 && String.Compare("Lưu trú", row.Cells["colArea"].Value.ToString()) == 0)
-                            {
-                                rowsToRemove.Add(row);
-                            }
+                            TypeRemove.Add(check.ToString());
                         }
                     }
-                    if (listCbFoods.CheckedItems.Count > 0)
+                    foreach (DataGridViewRow row in dtaGrid.Rows)
                     {
-                        foreach (var check in listCbFoods.CheckedItems)
+                        if (String.Compare("Lưu trú", row.Cells["colArea"].Value.ToString(), true) == 0 && TypeRemove.Contains(row.Cells["colType"].Value.ToString()) == false)
                         {
-                            if (String.Compare(check.ToString(), row.Cells["colType"].Value.ToString()) != 0 && String.Compare("Ăn uống", row.Cells["colArea"].Value.ToString()) == 0)
-                            {
-                                rowsToRemove.Add(row);
-                            }
-                        }
-                    }
-                    if (listCbPlay.CheckedItems.Count > 0)
-                    {
-                        foreach (var check in listCbPlay.CheckedItems)
-                        {
-                            if (String.Compare(check.ToString(), row.Cells["colType"].Value.ToString()) != 0 && String.Compare("Vui chơi/Tham quan", row.Cells["colArea"].Value.ToString()) == 0)
-                            {
-                                rowsToRemove.Add(row);
-                            }
-                        }
-                    }
-                    if (listCbCoffee.CheckedItems.Count > 0)
-                    {
-                        foreach (var check in listCbCoffee.CheckedItems)
-                        {
-                            if (String.Compare(check.ToString(), row.Cells["colType"].Value.ToString()) != 0 && String.Compare("Cà phê", row.Cells["colArea"].Value.ToString()) == 0)
-                            {
-                                rowsToRemove.Add(row);
-                            }
+                            rowToRemove.Add(row);
                         }
                     }
                 }
-                foreach (DataGridViewRow row in rowsToRemove)
+                if (listCbFoods.CheckedItems.Count > 0)
+                {
+                    foreach (var check in listCbFoods.CheckedItems)
+                    {
+                        if (TypeRemove.Contains(check.ToString()) == false)
+                        {
+                            TypeRemove.Add(check.ToString());
+                        }
+                    }
+                    foreach (DataGridViewRow row in dtaGrid.Rows)
+                    {
+                        if (String.Compare("Ăn uống", row.Cells["colArea"].Value.ToString(), true) == 0 && TypeRemove.Contains(row.Cells["colType"].Value.ToString()) == false)
+                        {
+                            rowToRemove.Add(row);
+                        }
+                    }
+                }
+                if (listCbPlay.CheckedItems.Count > 0)
+                {
+                    foreach (var check in listCbPlay.CheckedItems)
+                    {
+                        if (TypeRemove.Contains(check.ToString()) == false)
+                        {
+                            TypeRemove.Add(check.ToString());
+                        }
+                    }
+                    foreach (DataGridViewRow row in dtaGrid.Rows)
+                    {
+                        if (String.Compare("Vui chơi/Tham quan", row.Cells["colArea"].Value.ToString(), true) == 0 && TypeRemove.Contains(row.Cells["colType"].Value.ToString()) == false)
+                        {
+                            rowToRemove.Add(row);
+                        }
+                    }
+                }
+                if (listCbCoffee.CheckedItems.Count > 0)
+                {
+                    foreach (var check in listCbCoffee.CheckedItems)
+                    {
+                        if (TypeRemove.Contains(check.ToString()) == false)
+                        {
+                            TypeRemove.Add(check.ToString());
+                        }
+                    }
+                    foreach (DataGridViewRow row in dtaGrid.Rows)
+                    {
+                        if (String.Compare("Cà phê", row.Cells["colArea"].Value.ToString(), true) == 0 && TypeRemove.Contains(row.Cells["colType"].Value.ToString()) == false)
+                        {
+                            rowToRemove.Add(row);
+                        }
+                    }
+                }
+                foreach (DataGridViewRow row in rowToRemove)
                 {
                     dtaGrid.Rows.Remove(row);
                 }
@@ -281,7 +309,8 @@ namespace LocationTravel
                         Debug.WriteLine("Tổ hợp địa điểm (Số lượng tổ hợp - {0}):", combinations.Count);
                         foreach (var item in combinations)
                         {
-                            Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Latitude}")));
+                            Debug.WriteLine("Tong chi chi cua to hop la: {0}", item.Sum(x => x.Cost));
+                            Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
                         }
                         frmRecom form = new frmRecom(combinations, numUpDown.Value);
                         form.ShowDialog();
@@ -308,6 +337,7 @@ namespace LocationTravel
                         Debug.WriteLine("Tổ hợp địa điểm (Số lượng tổ hợp - {0}):", combinations.Count);
                         foreach (var item in combinations)
                         {
+                            Debug.WriteLine("Tong chi chi cua to hop la: {0}", item.Sum(x => x.Cost));
                             Debug.WriteLine(string.Join(", ", item.Select(element => $"Id: {element.Id} - Cost: {element.Cost}")));
                         }
                         frmRecom form = new frmRecom(combinations, numUpDown.Value);

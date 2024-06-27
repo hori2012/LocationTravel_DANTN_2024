@@ -127,6 +127,16 @@ namespace LocationTravel
             {
                 result.Add(locations[k]);
             }
+            double d = 0;
+            Debug.WriteLine("Khoang cach giua cac dia diem:");
+            for (int i = 1; i < item.Length; i++)
+            {
+                Debug.WriteLine("\tKhoang cach tu {0} -> {1}: {2} Km", item[i - 1], item[i], matrix[item[i - 1], item[i]]);
+                d += matrix[item[i - 1], item[i]];
+            }
+            Debug.WriteLine("\tKhoang cach tu {0} -> {1}: {2} Km", item[item.Length - 1], item[0], matrix[item[item.Length - 1], item[0]]);
+            d += matrix[item[item.Length - 1], item[0]];
+            Debug.WriteLine("\t-> Tong quang duong di chuyen la: {0}", d);
             return result;
         }
     }
